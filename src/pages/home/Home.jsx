@@ -15,7 +15,7 @@ const Home = () => {
  
   useEffect(()=>{
     getUserName();
-    fetch(`https://blog-server-two-alpha.vercel.app/${category}`).then(response => {
+    fetch(`https://blog-server-two-alpha.vercel.app/getPosts/${category}`).then(response => {
       response.json().then(posts => {
         setPosts(posts);
         console.log(posts);
