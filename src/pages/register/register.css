@@ -1,0 +1,63 @@
+.register{
+    padding: 50px 100px;
+}
+.register .heading{
+    width: 100%;
+    margin: auto;
+
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--font-family);
+    font-size: 3rem;
+    font-weight: 700;
+}
+.register form{
+    max-width: 750px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+.register input{
+    padding: 24px;
+    font-size: 16px;
+    font-family: var(--font-family);
+
+    border: 1px solid #c5c5c5;
+    margin-bottom: 35px;
+}
+.register .btn{
+    width: 14rem;
+    height: 3.8rem;
+
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    background-color: #111;
+    color: #fff;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .register .heading{
+        padding: 100px 0 50px 0;
+
+        font-size: 2rem;
+    }
+    .register{
+        padding: 25px 25px;
+    }
+    .register input{
+        padding: 16px;
+    }
+    .register .btn{
+        font-size: 1.1rem;
+    }
+}

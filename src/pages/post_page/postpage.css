@@ -1,0 +1,241 @@
+.postpage{
+    padding: 50px 100px;
+}
+
+.postpage .content{
+    max-width: 1000px;
+    margin: auto;
+}
+.postpage .content .heading{
+    padding: 120px 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.postpage .content .heading .tag{
+    background: linear-gradient(90deg, rgba(128, 204, 255, 1) 0%, rgba(255, 164, 255, 1) 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 20px;
+    margin: 20px 0;
+
+    font-family: var(--font-family);
+    font-size: 1rem;
+    border-radius: 60px;
+    
+}
+
+
+.postpage .content .heading .by{
+    font-family: var(--font-family);
+    color: grey;
+
+    font-weight: 700;
+}
+
+
+.postpage .content .heading .title{
+    font-family: var(--font-family);
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0px 0 34px 0;
+}
+.postpage .content .heading .summary{
+    font-family: var(--font-family);
+    font-size: 23px;
+    letter-spacing: -0.03em;
+    line-height: 35px;
+}
+
+.postpage .content .image{
+    max-height: 600px;
+    display: flex;
+    overflow: hidden;
+}
+.postpage .content .image img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+.postpage .content .para{
+    padding: 80px 80px;
+}
+
+.postpage .content .para img{
+    max-width: 100%;
+}
+
+.postpage .content .para{
+    font-family: var(--font-family);
+    font-size: 1.3rem;
+    line-height: 34px;
+}
+.postpage .content .actions{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.postpage .content .actions .edit svg{
+    height: 22px;
+    
+}
+.postpage .content .actions .edit .edit-btn{
+    padding: 15px 40px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 700;
+
+    display: inline-flex;
+    gap: 10px;
+
+    background: #111;
+    color: #fff;
+}
+
+.postpage .content .actions .delete svg{
+    height: 22px;
+    
+}
+.postpage .content .actions .delete .delete-btn{
+    margin-left: 40px;
+    padding: 15px 40px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 700;
+
+    display: inline-flex;
+    gap: 10px;
+
+    background: rgb(255, 52, 52);
+    color: #fff;
+
+    cursor: pointer;
+}
+
+.postpage .content .comment-head{
+    font-family: var(--font-family);
+    font-size: 1.8rem;
+    margin: 80px 0 20px 0;
+}
+.postpage .content .comments{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.postpage .content .comments textarea{
+    width: 100%;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    padding: 20px;
+}
+
+.postpage .content .comments .btn{
+    width: 14rem;
+    height: 3.8rem;
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    background-color: #111;
+    color: #fff;
+    cursor: pointer;
+}
+
+.postpage .content .comment .username{
+    font-family: var(--font-family);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+}
+.postpage .content .comment .time{
+    margin-top: 5px;
+
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 700;
+    color: grey;
+}
+
+.postpage .content .comment .matter{
+    margin-top: 30px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.postpage .content .comment .line{
+    width: 100%;
+    height: 1px;
+
+    background: rgb(216, 216, 216);
+}
+
+@media screen and (max-width: 768px) {
+    .postpage{
+        padding: 30px 14px;
+    }
+
+    .postpage .content .heading{
+        padding: 120px 14px;
+    }
+
+    .postpage .content .para{
+        padding: 80px 20px;
+    }
+
+    .postpage .content .heading .by{
+        font-size: 0.9rem;
+    }
+
+    .postpage .content .heading .title{
+        font-size: 2.2rem;
+    }
+    .postpage .content .heading .summary{
+        font-size: 1.1rem;
+        line-height: 30px;
+    }
+    .postpage .content .para{
+        font-size: 1.1rem;
+        line-height: 30px;
+    }
+
+    .postpage .content .actions .edit .edit-btn{
+        padding: 10px 15px;
+
+    }
+    .postpage .content .actions .delete .delete-btn{
+        margin-left: 12px;
+        padding: 10px 15px;
+    }
+
+    .postpage .content .comments .btn{
+        width: 8rem;
+        height: 3rem;
+
+        font-size: 1rem;
+    }
+
+    .postpage .content .comment-head{
+        font-size: 1.5rem;
+        margin-top: 80px;
+    }
+
+    .postpage .content .heading .tag{
+        padding: 8px 15px;
+    }
+}

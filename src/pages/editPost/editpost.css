@@ -1,0 +1,88 @@
+.editpost{
+    padding: 50px 100px;
+}
+.editpost .create{
+    margin-top: 80px;
+}
+.editpost .create .heading{
+    font-family: var(--font-family);
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+}
+
+.editpost form{
+    max-width: 750px; 
+    margin: auto;
+ 
+    display: flex;
+    flex-direction: column;
+}
+.editpost input{
+    padding: 24px;
+    font-size: 16px;
+    font-family: var(--font-family);
+
+    border: 1px solid #c5c5c5;
+    margin-bottom: 35px;
+}
+
+.editpost .category{
+    font-family: var(--font-family);
+    padding: 24px 30px;
+    font-size: 16px;
+
+    margin-bottom: 40px;
+
+    -webkit-appearance: none; /* Safari and Chrome */
+    -moz-appearance: none; /* Firefox */
+    appearance: none;
+    background-image: none; /* Remove any existing background image */
+}
+
+.editpost .btn{
+    width: 14rem;
+    height: 3.8rem;
+
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    background-color: #111;
+    color: #fff;
+    cursor: pointer;
+    margin-left: auto;
+
+    margin-top: 20px;
+}
+
+.editpost .label{
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1.2rem;
+    
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 768px){
+    .editpost{
+        padding: 25px 25px; 
+    }
+    .editpost .create .heading{
+        font-size: 1.8rem;
+    }
+    .editpost input{
+        padding: 16px;
+    }
+    .editpost .btn{
+        width: 8rem;
+        height: 3.5rem;
+        margin: 0;
+        margin-top: 20px;
+    }
+    .editpost .label{
+        font-size: 1rem;
+    }
+}
