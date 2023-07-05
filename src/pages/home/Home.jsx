@@ -15,7 +15,7 @@ const Home = () => {
  
   useEffect(()=>{
     getUserName();
-    fetch(`https://gray-frightened-moth.cyclic.app/getPosts/${category}`).then(response => {
+    fetch(`https://blog-server-two-alpha.vercel.app/getPosts/${category}`).then(response => {
       response.json().then(posts => {
         setPosts(posts);
         console.log(posts);
@@ -25,7 +25,7 @@ const Home = () => {
   }, [category]);
 
   function getUserName(){
-    fetch('https://gray-frightened-moth.cyclic.app/getUserName', {
+    fetch('https://blog-server-two-alpha.vercel.app/getUserName', {
         credentials: 'include',
     }, []).then(response => {
         response.json().then(data => {

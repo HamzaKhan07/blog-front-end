@@ -43,7 +43,7 @@ const Post = () => {
 
         //fetch
         const response = await fetch(
-            'https://gray-frightened-moth.cyclic.app/post',
+            'https://blog-server-two-alpha.vercel.app/post',
             {
                 method: 'POST',
                 body: data,

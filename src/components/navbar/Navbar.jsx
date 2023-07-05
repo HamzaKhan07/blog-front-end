@@ -9,7 +9,7 @@ const Navbar = () => {
 
   useEffect(()=>{
     
-    fetch('https://gray-frightened-moth.cyclic.app/profile', {
+    fetch('https://blog-server-two-alpha.vercel.app/profile', {
       credentials: 'include',
     }).then((response) => {
       response.json().then((userInfo)=>{
@@ -21,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   function logout(){
-    fetch('https://gray-frightened-moth.cyclic.app/logout', {
+    fetch('https://blog-server-two-alpha.vercel.app/logout', {
       credentials: 'include',
       method: 'POST',
     });

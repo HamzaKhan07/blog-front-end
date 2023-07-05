@@ -36,7 +36,7 @@ const modules = {
 
     useEffect(()=>{
         
-        fetch('https://gray-frightened-moth.cyclic.app/posts/'+id).then(response => {
+        fetch('https://blog-server-two-alpha.vercel.app/posts/'+id).then(response => {
             response.json().then(postData => {
                 setTitle(postData.title);
                 setSummary(postData.summary);
