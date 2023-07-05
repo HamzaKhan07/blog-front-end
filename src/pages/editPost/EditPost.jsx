@@ -36,7 +36,7 @@ const modules = {
 
     useEffect(()=>{
         
-        fetch('https://blogify-kohl-gamma.vercel.app/'+id).then(response => {
+        fetch('https://blog-server-two-alpha.vercel.app/'+id).then(response => {
             response.json().then(postData => {
                 setTitle(postData.title);
                 setSummary(postData.summary);
@@ -61,7 +61,7 @@ const modules = {
             data.set('file', files?.[0]);
         }
 
-        const response = await fetch('https://blogify-kohl-gamma.vercel.app/post', {
+        const response = await fetch('https://blog-server-two-alpha.vercel.app/post', {
             method: 'PUT',
             body: data,
             credentials: 'include'

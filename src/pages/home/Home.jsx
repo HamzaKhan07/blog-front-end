@@ -15,7 +15,7 @@ const Home = () => {
  
   useEffect(()=>{
     getUserName();
-    fetch(`https://blogify-kohl-gamma.vercel.app/${category}`).then(response => {
+    fetch(`https://blog-server-two-alpha.vercel.app/${category}`).then(response => {
       response.json().then(posts => {
         setPosts(posts);
         console.log(posts);
@@ -25,7 +25,7 @@ const Home = () => {
   }, [category]);
 
   function getUserName(){
-    fetch('https://blogify-kohl-gamma.vercel.app/getUserName', {
+    fetch('https://blog-server-two-alpha.vercel.app/getUserName', {
         credentials: 'include',
     }, []).then(response => {
         response.json().then(data => {
