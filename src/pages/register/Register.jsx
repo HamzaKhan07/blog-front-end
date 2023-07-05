@@ -19,7 +19,7 @@ const Register = () => {
       return; 
     }
 
-    const response = await fetch('https://blog-server-two-alpha.vercel.app/register/', {
+    const response = await fetch('https://blogify-kohl-gamma.vercel.app/register/', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type': 'application/json'}, 

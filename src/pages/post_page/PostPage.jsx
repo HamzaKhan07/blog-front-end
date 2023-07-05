@@ -18,7 +18,7 @@ const PostPage = () => {
     useEffect(()=>{
         getUserID();
 
-        fetch(`https://blog-server-two-alpha.vercel.app/posts/${id}`)
+        fetch(`https://blogify-kohl-gamma.vercel.app/${id}`)
         .then(response => {
             response.json().then(postInfo => {
                 //set post data
@@ -32,7 +32,7 @@ const PostPage = () => {
     if(postInfo==null) return ''; 
 
     function getUserID(){
-        fetch('https://blog-server-two-alpha.vercel.app/getUserId', {
+        fetch('https://blogify-kohl-gamma.vercel.app/getUserId', {
             credentials: 'include',
         }, []).then(response => {
             response.json().then(data => {
@@ -48,7 +48,7 @@ const PostPage = () => {
             alert("Please fill the comment!");
         }
 
-        const response = await fetch(`https://blog-server-two-alpha.vercel.app/comments/${id}`, {
+        const response = await fetch(`https://blogify-kohl-gamma.vercel.app/${id}`, {
             method: 'POST',
             body: JSON.stringify({comment, userId}),
             headers: {'Content-Type': 'application/json'}
@@ -66,7 +66,7 @@ const PostPage = () => {
         const isConfirm = window.confirm('Are you sure you want to delete this Post ?');
         if(isConfirm === true){
             //delete the post
-            const response = await fetch(`https://blog-server-two-alpha.vercel.app/delete/${id}`, {
+            const response = await fetch(`https://blogify-kohl-gamma.vercel.app/${id}`, {
                 method: 'DELETE',
             });
 
@@ -100,7 +100,7 @@ const PostPage = () => {
                 
             </div>
             <div className="image">
-                <img src={`https://blog-server-two-alpha.vercel.app/${postInfo.cover}`} alt="postImage"/>
+                <img src={`https://blogify-kohl-gamma.vercel.app/${postInfo.cover}`} alt="postImage"/>
             </div>
             <div className="para" dangerouslySetInnerHTML={{__html: postInfo.content}}></div>
 

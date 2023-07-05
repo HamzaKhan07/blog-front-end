@@ -9,7 +9,7 @@ const Navbar = () => {
 
   useEffect(()=>{
     
-    fetch('https://blog-server-two-alpha.vercel.app/profile', {
+    fetch('https://blogify-kohl-gamma.vercel.app/profile', {
       credentials: 'include',
     }).then((response) => {
       response.json().then((userInfo)=>{
@@ -21,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   function logout(){
-    fetch('https://blog-server-two-alpha.vercel.app/logout', {
+    fetch('https://blogify-kohl-gamma.vercel.app/logout', {
       credentials: 'include',
       method: 'POST',
     });

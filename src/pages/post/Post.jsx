@@ -43,7 +43,7 @@ const Post = () => {
 
         //fetch
         const response = await fetch(
-            'https://blog-server-two-alpha.vercel.app/post',
+            'https://blogify-kohl-gamma.vercel.app/post',
             {
                 method: 'POST',
                 body: data,
