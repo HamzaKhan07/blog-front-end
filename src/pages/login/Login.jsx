@@ -2,16 +2,24 @@ import './login.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useState } from 'react';
 import { Navigate } from "react-router-dom";
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const Login = () => { 
-  const [username, setUsername] = useState(''); 
+  const [username, setUsername] = useState('');  
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
+
+  
 
   async function login(e){
     e.preventDefault();
 
-    const response = await fetch('https://blog-server-two-alpha.vercel.app/login',{
+    if(username==='' || password===''){
+      alert("Please fill all the fields!");
+      return;
+    }
+
+    const response = await fetch('http://localhost:4000/login',{
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type': 'application/json'},
@@ -20,6 +28,14 @@ const Login = () => {
 
     //if result is ok, navigate to homepage
     if(response.ok){
+      //set user id and password globally
+      const {_id, username} = await response.json();
+      reactLocalStorage.set('id', _id);
+      reactLocalStorage.set('username', username);
+
+      console.log("id:" +_id);
+
+      //now redirect
       setRedirect(true);
     }
     else{

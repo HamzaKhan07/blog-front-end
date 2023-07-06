@@ -4,36 +4,39 @@ import Navbar from '../../components/navbar/Navbar';
 import Tile from '../../components/tile/Tile';
 import {format } from 'date-fns';
 import searchImage from '../../assets/question.png';
-
 import { useEffect } from 'react';
+
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [category, setCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [userName, setUserName] = useState('');
+  const [isLoading, setLoading] = useState(true);
+
  
   useEffect(()=>{
-    getUserName();
-    fetch(`https://blog-server-two-alpha.vercel.app/getPosts/${category}`).then(response => {
+    //set loading
+    setLoading(true);
+    console.log('loading: '+isLoading);
+
+    //set username
+    setUserName(reactLocalStorage.get('username'));
+
+    fetch(`http://localhost:4000/getPosts/${category}`).then(response => {
       response.json().then(posts => {
         setPosts(posts);
         console.log(posts);
+
+        //set loading false
+        setLoading(false);
       });
     });
 
-  }, [category]);
+    
 
-  function getUserName(){
-    fetch('https://blog-server-two-alpha.vercel.app/getUserName', {
-        credentials: 'include',
-    }, []).then(response => {
-        response.json().then(data => {
-            setUserName(data.username);
-            console.log("username: "+data.username);
-        })
-    });
-}
+  }, [category]);
 
   function search(ev){
     ev.preventDefault();
@@ -42,8 +45,7 @@ const Home = () => {
     if(searchQuery === ''){
       alert("Please fill the Search box!");
     }
-    console.log(searchQuery);
-
+    
     setCategory(searchQuery);
   }
 
@@ -87,15 +89,24 @@ const Home = () => {
             
         </div>
 
+
         {/* when no posts */}
         {
-            posts.length===0 && (
+            (posts.length===0) && (
               <div className="empty">
-                <img src={searchImage} alt="No posts"/>
-                <p>Posts are empty.</p>
+                {isLoading && (
+                  <span class="loader"></span>
+                )}
+                {!isLoading && (
+                  <>
+                    <img src={searchImage} alt="No posts"/>
+                    <p>Posts are empty.</p>
+                  </>
+                )}
+                
               </div>
             )
-          }
+        }
 
         <div className="grid">
           {posts.length > 0 && posts.map(post => {

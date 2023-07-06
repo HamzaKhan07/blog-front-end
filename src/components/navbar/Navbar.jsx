@@ -3,28 +3,21 @@ import './navbar.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const Navbar = () => {
   const [username, setUsername] = useState(null);
 
-  useEffect(()=>{
-    
-    fetch('https://blog-server-two-alpha.vercel.app/profile', {
-      credentials: 'include',
-    }).then((response) => {
-      response.json().then((userInfo)=>{
-        //set username
-        setUsername(userInfo.username);
-      });
-    });
-
+  useEffect(()=>{ 
+    //set username 
+    setUsername(reactLocalStorage.get('username'));
+    console.log("Nav username: "+reactLocalStorage.get('username'));
   }, []);
 
   function logout(){
-    fetch('https://blog-server-two-alpha.vercel.app/logout', {
-      credentials: 'include',
-      method: 'POST',
-    });
+    //reset 
+    reactLocalStorage.set('username', '');
+    reactLocalStorage.set('id', '');
 
     setUsername(null);
   }

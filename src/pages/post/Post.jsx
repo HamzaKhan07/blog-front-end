@@ -6,6 +6,8 @@ import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
 import {Navigate} from 'react-router-dom'; 
 
+import {reactLocalStorage} from 'reactjs-localstorage';
+
 const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -25,6 +27,7 @@ const modules = {
 
 
 const Post = () => {
+  
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
@@ -34,7 +37,10 @@ const Post = () => {
 
     async function createPost(ev){
         ev.preventDefault();
+
         const data=new FormData();
+        data.set('userId', reactLocalStorage.get('id'));
+        console.log("User ID: "+reactLocalStorage.get('id'));
         data.set('title', title);
         data.set('summary', summary);
         data.set('content', content);
@@ -43,7 +49,7 @@ const Post = () => {
 
         //fetch
         const response = await fetch(
-            'https://blog-server-two-alpha.vercel.app/post',
+            'http://localhost:4000/post',
             {
                 method: 'POST',
                 body: data,

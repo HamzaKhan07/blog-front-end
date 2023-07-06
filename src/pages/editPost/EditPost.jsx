@@ -6,6 +6,8 @@ import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
 import {Navigate, useParams} from 'react-router-dom';
 
+import {reactLocalStorage} from 'reactjs-localstorage';
+
 const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -36,7 +38,7 @@ const modules = {
 
     useEffect(()=>{
         
-        fetch('https://blog-server-two-alpha.vercel.app/'+id).then(response => {
+        fetch('http://localhost:4000/posts/'+id).then(response => {
             response.json().then(postData => {
                 setTitle(postData.title);
                 setSummary(postData.summary);
@@ -51,6 +53,7 @@ const modules = {
         e.preventDefault();
     
         const data=new FormData(); 
+        data.set('userId', reactLocalStorage.get('id'));
         data.set('id', id);
         data.set('title', title);
         data.set('summary', summary);
@@ -61,7 +64,7 @@ const modules = {
             data.set('file', files?.[0]);
         }
 
-        const response = await fetch('https://blog-server-two-alpha.vercel.app/post', {
+        const response = await fetch('http://localhost:4000/post', {
             method: 'PUT',
             body: data,
             credentials: 'include'

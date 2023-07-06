@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './postpage.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useParams, Navigate } from 'react-router-dom';
-import { formatISO9075, format, formatDistance } from 'date-fns';
+import { format, formatDistance } from 'date-fns';
 import { Link } from 'react-router-dom';
+
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const PostPage = () => {
     const params = useParams();
@@ -16,9 +18,10 @@ const PostPage = () => {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(()=>{
-        getUserID();
+        //set logged in userID
+        setUserId(reactLocalStorage.get('id'));
 
-        fetch(`https://blog-server-two-alpha.vercel.app/posts/${id}`)
+        fetch(`http://localhost:4000/posts/${id}`)
         .then(response => {
             response.json().then(postInfo => {
                 //set post data
@@ -31,15 +34,6 @@ const PostPage = () => {
  
     if(postInfo==null) return ''; 
 
-    function getUserID(){
-        fetch('https://blog-server-two-alpha.vercel.app/getUserId', {
-            credentials: 'include',
-        }, []).then(response => {
-            response.json().then(data => {
-                setUserId(data.id);
-            })
-        });
-    }
 
     async function addComments(ev){
         ev.preventDefault();
@@ -48,7 +42,7 @@ const PostPage = () => {
             alert("Please fill the comment!");
         }
 
-        const response = await fetch(`https://blog-server-two-alpha.vercel.app/comments/${id}`, {
+        const response = await fetch(`http://localhost:4000/comments/${id}`, {
             method: 'POST',
             body: JSON.stringify({comment, userId}),
             headers: {'Content-Type': 'application/json'}
@@ -66,7 +60,7 @@ const PostPage = () => {
         const isConfirm = window.confirm('Are you sure you want to delete this Post ?');
         if(isConfirm === true){
             //delete the post
-            const response = await fetch(`https://blog-server-two-alpha.vercel.app/delete/${id}`, {
+            const response = await fetch(`http://localhost:4000/delete/${id}`, {
                 method: 'DELETE',
             });
 
@@ -100,12 +94,12 @@ const PostPage = () => {
                 
             </div>
             <div className="image">
-                <img src={`https://blog-server-two-alpha.vercel.app/${postInfo.cover}`} alt="postImage"/>
+                <img src={`http://localhost:4000/${postInfo.cover}`} alt="postImage"/>
             </div>
             <div className="para" dangerouslySetInnerHTML={{__html: postInfo.content}}></div>
 
 
-            {userId === postInfo.author._id && (
+            {(userId === postInfo.author._id) && (userId!=='' && postInfo.author._id!=='') && (
                     <div className="actions">
                         <div className="edit">
                             <Link to={`/editPost/${postInfo._id}`} className="edit-btn">
@@ -132,12 +126,12 @@ const PostPage = () => {
 
                 <h2 className="comment-head">Comments</h2>
                 
-            {userId === postInfo.author._id && (
+                {/* everybody can comment */}
                 <form className="comments" onSubmit={addComments}>
                     <textarea rows="5" value={comment} onChange={(ev)=> setComment(ev.target.value)}></textarea>
                     <button className="btn">Add</button>
                 </form>
-            )}
+          
 
             
 
