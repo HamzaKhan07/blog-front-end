@@ -42,7 +42,7 @@ const modules = {
 
     useEffect(()=>{ 
         
-        fetch('http://localhost:4000/posts/'+id).then(response => {
+        fetch('https://blog-server-two-alpha.vercel.app/posts/'+id).then(response => {
             response.json().then(postData => {
                 setTitle(postData.title);
                 setSummary(postData.summary);
@@ -75,7 +75,7 @@ const modules = {
 
         setLoading(false);
 
-        const response = await fetch('http://localhost:4000/post', {
+        const response = await fetch('https://blog-server-two-alpha.vercel.app/post', {
             method: 'PUT',
             body: JSON.stringify(data),
             credentials: 'include',

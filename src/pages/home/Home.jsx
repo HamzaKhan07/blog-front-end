@@ -24,7 +24,7 @@ const Home = () => {
     //set username
     setUserName(reactLocalStorage.get('username'));
 
-    fetch(`http://localhost:4000/getPosts/${category}`).then(response => {
+    fetch(`https://blog-server-two-alpha.vercel.app/getPosts/${category}`).then(response => {
       response.json().then(posts => {
         setPosts(posts);
         console.log(posts);

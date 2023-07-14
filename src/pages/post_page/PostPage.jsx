@@ -21,7 +21,7 @@ const PostPage = () => {
         //set logged in userID
         setUserId(reactLocalStorage.get('id'));
 
-        fetch(`http://localhost:4000/posts/${id}`)
+        fetch(`https://blog-server-two-alpha.vercel.app/posts/${id}`)
         .then(response => {
             response.json().then(postInfo => {
                 //set post data
@@ -42,7 +42,7 @@ const PostPage = () => {
             alert("Please fill the comment!");
         }
 
-        const response = await fetch(`http://localhost:4000/comments/${id}`, {
+        const response = await fetch(`https://blog-server-two-alpha.vercel.app/comments/${id}`, {
             method: 'POST',
             body: JSON.stringify({comment, userId}),
             headers: {'Content-Type': 'application/json'}
@@ -60,7 +60,7 @@ const PostPage = () => {
         const isConfirm = window.confirm('Are you sure you want to delete this Post ?');
         if(isConfirm === true){
             //delete the post
-            const response = await fetch(`http://localhost:4000/delete/${id}`, {
+            const response = await fetch(`https://blog-server-two-alpha.vercel.app/delete/${id}`, {
                 method: 'DELETE',
             });
 
