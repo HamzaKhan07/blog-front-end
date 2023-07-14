@@ -7,6 +7,8 @@ import { useState } from 'react';
 import {Navigate} from 'react-router-dom'; 
 
 import {reactLocalStorage} from 'reactjs-localstorage';
+import storage from '../../firebase/firebase';
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 
 const modules = {
     toolbar: [
@@ -34,26 +36,38 @@ const Post = () => {
     const [selectedOption, setSelectedOption] = useState('All');
     const [redirect, setRedirect] = useState(false);
     const [files, setFiles] = useState('');
+    const [isLoading, setLoading] = useState(false);
 
     async function createPost(ev){
         ev.preventDefault();
 
-        const data=new FormData();
-        data.set('userId', reactLocalStorage.get('id'));
-        console.log("User ID: "+reactLocalStorage.get('id'));
-        data.set('title', title);
-        data.set('summary', summary);
-        data.set('content', content);
-        data.set('category', selectedOption);
-        data.set('file', files[0]);
+        //set loading
+        setLoading(true);
+
+        const url = await uploadImage();
+
+        console.log("uploading: "+url);
+
+        const data = {
+          'userId': reactLocalStorage.get('id'),
+          'title': title,
+          'summary': summary,
+          'content': content,
+          'category': selectedOption,
+          'imageUrl': url
+        };
+
+        //hide loading
+        setLoading(false);
 
         //fetch
         const response = await fetch(
-            'https://blog-server-two-alpha.vercel.app/post',
+            'http://localhost:4000/post',
             {
                 method: 'POST',
-                body: data,
-                credentials: 'include'
+                body: JSON.stringify(data),
+                credentials: 'include',
+                headers: {'Content-Type' : 'application/json'},
             }
         );
 
@@ -66,6 +80,17 @@ const Post = () => {
     if(redirect===true){
       //navigate to home page
       return <Navigate to="/"/>
+    }
+
+    async function uploadImage(){
+      const date = Date.now();
+
+      const imageRef = ref(storage, date.toString());
+
+      await uploadBytes(imageRef, files[0]);
+      const url = await getDownloadURL(imageRef);
+
+      return url;
     }
 
   return (
@@ -110,7 +135,14 @@ const Post = () => {
                 formats={formats} 
             />
 
-            <button className="btn">Create</button>
+            <button className="btn">
+              {isLoading && (
+                <span class="loader_create"></span>
+              )}
+              {!isLoading && (
+                <p>Create</p>
+              )}
+            </button>
         </form>
     </div>
   )

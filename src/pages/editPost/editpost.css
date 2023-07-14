@@ -43,6 +43,7 @@
 .editpost .btn{
     width: 14rem;
     height: 3.8rem;
+    text-align: center;
 
     font-family: var(--font-family);
     font-weight: 700;
@@ -55,7 +56,31 @@
     margin-left: auto;
 
     margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.editpost .btn .loader_edit{
+    width: 15px;
+    height: 15px;
+    border: 2px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    }
 
 .editpost .label{
     font-family: var(--font-family);

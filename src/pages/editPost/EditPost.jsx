@@ -6,6 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
 import {Navigate, useParams} from 'react-router-dom';
 
+import storage from '../../firebase/firebase';
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
+
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 const modules = {
@@ -35,10 +38,11 @@ const modules = {
     const [selectedOption, setSelectedOption] = useState('All');
     const [redirect, setRedirect] = useState(false);
     const [files, setFiles] = useState('');
+    const [isLoading, setLoading] = useState(false);
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         
-        fetch('https://blog-server-two-alpha.vercel.app/posts/'+id).then(response => {
+        fetch('http://localhost:4000/posts/'+id).then(response => {
             response.json().then(postData => {
                 setTitle(postData.title);
                 setSummary(postData.summary);
@@ -52,28 +56,47 @@ const modules = {
     async function updatePost(e){
         e.preventDefault();
     
-        const data=new FormData(); 
-        data.set('userId', reactLocalStorage.get('id'));
-        data.set('id', id);
-        data.set('title', title);
-        data.set('summary', summary);
-        data.set('content', content);
-        data.set('category', selectedOption);
+        setLoading(true);
 
+        let url='';
         if(files?.[0]){
-            data.set('file', files?.[0]);
+            url = await uploadImage(files?.[0]);
         }
 
-        const response = await fetch('https://blog-server-two-alpha.vercel.app/post', {
+        const data = {
+          'userId': reactLocalStorage.get('id'),
+          'id': id,
+          'title': title,
+          'summary': summary,
+          'content': content,
+          'category': selectedOption,
+          'imageUrl': url
+        };
+
+        setLoading(false);
+
+        const response = await fetch('http://localhost:4000/post', {
             method: 'PUT',
-            body: data,
-            credentials: 'include'
+            body: JSON.stringify(data),
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'}
         });
 
         //check res
         if(response.ok){
             setRedirect(true);
         }
+      }
+
+      async function uploadImage(file){
+        const date = Date.now();
+  
+        const imageRef = ref(storage, date.toString());
+  
+        await uploadBytes(imageRef, file);
+        const url = await getDownloadURL(imageRef);
+  
+        return url;
       }
 
     if(redirect===true){
@@ -121,7 +144,14 @@ const modules = {
                 formats={formats} 
             />
 
-            <button className="btn">Update</button>
+            <button className="btn">
+            {isLoading && (
+                <span class="loader_edit"></span>
+              )}
+              {!isLoading && (
+                <p>Update</p>
+              )}
+            </button>
         </form>
     </div>
   )

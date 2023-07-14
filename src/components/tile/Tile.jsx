@@ -7,7 +7,7 @@ const Tile = (props) => {
     <div className="tile">  
       <Link to={`/post/${props.id}`}>
           <div className="image"> 
-              <img src={'https://blog-server-two-alpha.vercel.app/'+props.image} alt="post"/>
+              <img src={props.image} alt="post"/>
           </div>
           <div className="content">
               <p className="by">{props.by}</p>
